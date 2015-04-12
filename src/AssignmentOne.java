@@ -10,7 +10,7 @@ import java.util.Set;
 public class AssignmentOne {
 
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException{
+	public static void main(String[] args) throws ClassNotFoundException, SQLException,Exception{
 		Class.forName("org.apache.cassandra.cql.jdbc.CassandraDriver");
 		Connection con = DriverManager.getConnection("jdbc:cassandra://localhost:9160/dev?consistency=QUORUM");
 		truncate(con);
@@ -45,7 +45,7 @@ public class AssignmentOne {
 		}
 
 		long end = System.currentTimeMillis();
-		System.out.println("Sorted order time in millis -> " + (end-start));
+		System.out.println("Random order time in millis -> " + (end-start));
 	}
 
 

@@ -1,0 +1,51 @@
+<project name="DBAssignment" default="dist" basedir=".">
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="debuglevel" value="source,lines,vars"/>
+  <property name="target" value="1.6"/>
+  <property name="source" value="1.6"/>
+
+  <path id="project.classpath">
+    <fileset dir="lib/">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <manifestclasspath property="lib.list" jarfile="DBAssignment.jar">
+    <classpath refid="project.classpath"/>
+  </manifestclasspath>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}"/>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="DBAssignment.jar" basedir="${build}">
+    <manifest>
+        <attribute name="Main-Class" value="AssignmentOne" />
+	<attribute name="Class-Path" value="${lib.list}"/>
+    </manifest>
+    </jar>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete>
+      <fileset dir="." includes="*.jar"/>
+    </delete>
+  </target>
+</project>
